@@ -1,0 +1,22 @@
+#datasets-view {
+    width: 80%;
+    margin: auto;
+}
+
+#datasets-info-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+#rows-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#rows-form > * {
+    margin-left: 12px;
+}

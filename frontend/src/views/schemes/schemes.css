@@ -1,0 +1,61 @@
+#schemas-title-row {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+#schemas-table {
+    width: 80%;
+    margin: auto;
+    margin-top: 12px;
+}
+
+#create-scheme-setup {
+    width: 50%;
+}
+
+#create-scheme-setup > * {
+    padding: 12px;
+}
+
+#create-scheme-form {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+#add-row-btn {
+    margin-top: 12px;
+    padding-left: 6px;
+}
+
+#row-add-new {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 12px 24px;
+    width: 85%;
+}
+
+.remove-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.schema-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.schema-del {
+    color: #D9534F;
+    cursor: pointer;
+}
+
+.schema-del:hover {
+    text-decoration: underline;
+    font-weight: 500;
+}

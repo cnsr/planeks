@@ -1,0 +1,13 @@
+#username-field {
+    margin-right: 15px !important;
+}
+
+#header-logout {
+    cursor: pointer;
+     opacity: 0.6;
+}
+
+#header-logout:hover {
+    opacity: 1;
+    font-weight: 700;
+}

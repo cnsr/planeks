@@ -1,0 +1,17 @@
+FROM python:3.8
+WORKDIR /app
+
+ENV PYTHONFAULTHANDLER=1 \
+    PYTHONHASHSEED=random \
+    PYTHONUNBUFFERED=1 \
+    DJANGO_SETTINGS_MODULE=planeks.settings.dev
+
+RUN pip install poetry 
+COPY pyproject.toml pyproject.toml
+COPY poetry.lock poetry.lock
+RUN poetry install --no-interaction
+COPY . .
+
+EXPOSE 8000
+
+RUN poetry run python manage.py collectstatic --noinput

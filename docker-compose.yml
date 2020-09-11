@@ -1,0 +1,65 @@
+version: "3.3"
+services:
+    postgres:
+        image: "postgres"
+        container_name: "postgres"
+        environment: 
+            - POSTGRES_PASSWORD=django
+            - POSTGRES_USER=django
+            - POSTGRES_DB=fakecsv
+        networks:
+            - default
+    redis:
+        container_name: "redis"
+        image: redis:alpine
+    celery:
+        container_name: "celery"
+        image: celery:4-4
+        build:
+            context: ./src
+            dockerfile: Dockerfile.backend
+        env_file: ./.env
+        command: poetry run celery -A planeks worker -l info
+        depends_on:
+            - redis
+        links:
+            - redis
+            - postgres
+            - backend
+        volumes:
+            - type: volume
+              source: data
+              target: /data
+              volume:
+                  nocopy: true
+    backend:
+        container_name: "backend"
+        build:
+            context: ./src
+            dockerfile: Dockerfile.backend
+        command: sh -c 'chmod +x ./start.sh && ./start.sh'
+        ports:
+            - 8000:8000
+        env_file: ./.env
+        environment:
+            - USE_S3=TRUE
+            - AWS_ACCESS_KEY_ID=AKIA2MCE4TYX5PUIOKEP
+            - AWS_SECRET_ACCESS_KEY=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
+            - AWS_STORAGE_BUCKET_NAME=planeks
+        depends_on:
+            - postgres
+        links:
+            - postgres
+        networks:
+            - default
+        volumes:
+            - type: volume
+              source: data
+              target: /data
+              volume:
+                  nocopy: true
+networks:
+    default:
+        driver: bridge
+volumes:
+  data:
